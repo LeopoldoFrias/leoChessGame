@@ -5,14 +5,14 @@ from MoreOfChess import Board as Board
 
 pygame.init()
 
-HEIGHT = 800
-WIDTH = 1000
-BLACK = pygame.Color('black')
-WHITE = pygame.Color('white')
+HEIGHT = 900
+WIDTH = 840
+BLACK = pygame.Color('grey')
+WHITE = pygame.Color('blue')
 
 # This is where the chess board is actually being made
 colors = itertools.cycle((WHITE, BLACK))
-tile_size = 90
+tile_size = 80
 width, height = 8*tile_size, 8*tile_size
 background = pygame.Surface((width, height))
 
@@ -158,75 +158,155 @@ piece = []
 # ------------------------------------------------------------------------------------------------------------------
 # What conditions will be if their is not piece present at that time
 
+class BlackKing(pygame.sprite.Sprite):
+
+   def __init__(self,pos):
+
+       super().__init__()
+
+       self.image = pygame.image.load("./images/Chess_tile_kd.png")
+       self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+       self.size = self.image.get_size()
+       self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
+       self.screen.blit(self.bigger_img)
 
 
-class King(pygame.sprite.Sprite):
+class BlackBishop(pygame.sprite.Sprite):
 
-    def __init__(self,pos):
+   def __init__(self,pos):
 
-        super().__init__()
+       super().__init__()
 
-        self.image = pygame.image.load("./images/Chess_tile_kd.png")
-        self.rect = pygame.Rect(pos[0], pos[0], 50, 50)
+       self.image = pygame.image.load("./images/Chess_tile_bd.png")
+       self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+       self.size = self.image.get_size()
+       self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
 
-class Bishop(pygame.sprite.Sprite):
+class BlackKnight(pygame.sprite.Sprite):
 
-    def __init__(self,pos):
+   def __init__(self,pos):
 
-        super().__init__()
+       super().__init__()
 
-        self.image = pygame.image.load("./images/Chess_tile_bd.png")
-        self.rect = pygame.Rect(pos[0], pos[0], 50, 50)
+       self.image = pygame.image.load("./images/Chess_tile_nd.png")
+       self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+       self.size = self.image.get_size()
+       self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
 
-class Knight(pygame.sprite.Sprite):
+class BlackPawn(pygame.sprite.Sprite):
 
-    def __init__(self,pos):
+   def __init__(self,pos):
 
-        super().__init__()
+       super().__init__()
 
-        self.image = pygame.image.load("./images/Chess_tile_nd.png")
-        self.rect = pygame.Rect(pos[0], pos[0], 50, 50)
+       self.image = pygame.image.load("./images/Chess_tile_pd.png")
+       self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+       self.size = self.image.get_size()
+       self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
 
-class Pawn(pygame.sprite.Sprite):
+class BlackCastle(pygame.sprite.Sprite):
 
-    def __init__(self,pos):
+   def __init__(self,pos):
+       super().__init__()
 
-        super().__init__()
+       self.image = pygame.image.load("./images/Chess_tile_rd.png")
+       self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+       self.size = self.image.get_size()
+       self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
 
-        self.image = pygame.image.load("./images/Chess_tile_pd.png")
-        self.rect = pygame.Rect(pos[0], pos[0], 50, 50)
+class BlackQueen(pygame.sprite.Sprite):
 
-class Castle(pygame.sprite.Sprite):
-
-    def __init__(self,pos):
-
-        super().__init__()
-
-        self.image = pygame.image.load("./images/Chess_tile_rd.png")
-        self.rect = pygame.Rect(pos[0], pos[0], 50, 50)
-
-class Queen(pygame.sprite.Sprite):
-
-    def __init__(self,pos):
-
+    def __init__(self, pos):
         super().__init__()
 
         self.image = pygame.image.load("./images/Chess_tile_qd.png")
-        self.rect = pygame.Rect(pos[0], pos[0], 50, 50)
+        self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+        self.size = self.image.get_size()
+        self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
+
+class WhiteKing(pygame.sprite.Sprite):
+
+    def __init__(self, pos):
+        super().__init__()
+
+        self.image = pygame.image.load("./images/Chess_tile_kl.png")
+        self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+        self.size = self.image.get_size()
+        self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
+
+class WhiteQueen(pygame.sprite.Sprite):
+
+    def __init__(self, pos):
+        super().__init__()
+
+        self.image = pygame.image.load("./images/Chess_tile_ql.png")
+        self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+        self.size = self.image.get_size()
+        self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
+
+class WhiteCastle(pygame.sprite.Sprite):
+
+    def __init__(self, pos):
+        super().__init__()
+
+        self.image = pygame.image.load("./images/Chess_tile_rl.png")
+        self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+        self.size = self.image.get_size()
+        self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
+
+class WhiteKnight(pygame.sprite.Sprite):
+
+    def __init__(self, pos):
+       super().__init__()
+       self.image = pygame.image.load("./images/Chess_tile_nl.png")
+       self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+       self.size = self.image.get_size()
+       self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
+
+class WhiteBishop(pygame.sprite.Sprite):
+
+   def __init__(self,pos):
+       super().__init__()
+
+       self.image = pygame.image.load("./images/Chess_tile_bl.png")
+       self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+       self.size = self.image.get_size()
+       self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
+
+class WhitePawn(pygame.sprite.Sprite):
+
+   def __init__(self,pos):
+
+       super().__init__()
+
+       self.image = pygame.image.load("./images/Chess_tile_pl.png")
+       self.rect = pygame.Rect(pos[0], pos[0], 10, 10)
+       self.size = self.image.get_size()
+       self.bigger_img = pygame.transform.scale(self.image, (int(self.size[0] * 2), int(self.size[1] * 2)))
+
 
 # ------------------------------------------------------------------------------------------------------------
 # Create pieces
 
-# white pieces
-white_team = pygame.sprite.Group()
+whiteTeam = pygame.sprite.Group()
+blackTeam = pygame.sprite.Group()
+#positions
+blackking = BlackKing([100, 100])
+blackqueen = BlackQueen([100, 100])
+blackcastle = BlackCastle([100, 100])
+blackknight = BlackKnight([100, 100])
+blackpawn = BlackPawn([100, 100])
+blackbishop = BlackBishop([100, 100])
+blackTeam.add(blackking, blackqueen, blackcastle, blackknight, blackpawn, blackbishop)
 
-king = King([0, 0])
-queen = Queen([100,100])
-castle = Castle([200, 200])
-knight = Knight([180, 180])
-pawn = Pawn([170, 170])
-bishop = Bishop([400, 130])
-white_team.add(king, queen, castle, knight, pawn, bishop)
+whiteking = WhiteKing([100, 100])
+whitequeen = WhiteQueen([100, 100])
+whitecastle = WhiteCastle([100, 100])
+whiteknight = WhiteKnight([100, 100])
+whitepawn = WhitePawn([100, 100])
+whitebishop = WhiteBishop([100, 100])
+whiteTeam.add(whiteking, whitequeen, whitecastle, whiteknight, whitepawn, whitebishop)
+
 
 # Constantly active variables during run time
 while 1:
@@ -239,7 +319,8 @@ while 1:
     screen.fill((60, 70, 90))
     screen.blit(background, (100, 100))
 
-    white_team.draw(screen)
+    whiteTeam.draw(screen)
+    blackTeam.draw(screen)
     pygame.display.update()
     pygame.display.update()
     clock.tick(60)
